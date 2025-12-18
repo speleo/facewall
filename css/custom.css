@@ -1,0 +1,162 @@
+/* Add your own custom css to this file. You may wish to use css !important calls to override css from the template css files.
+----------------------------------------------------------- */
+
+table td {
+    padding-left:5px;
+    padding-right:5px;
+}
+
+#s5_bread_lang_holder {
+margin-bottom:-50px;
+}
+
+#s5_center_area1 {
+padding-top: 55px;
+}
+
+#s5_header_spacer {
+height: 40px;
+}
+
+.s5_wrap_fmfullwidth #s5_logo_small {
+margin-top: 0px;
+}
+
+select {
+font-size:11pt !important;
+}
+
+.input-mini {
+width: 85px;
+}
+
+#filter-search {
+font-size: 11pt !important;
+}
+
+ul li {
+list-style-image: url(../images/smallbat.png);
+list-style-position: outside;
+}
+
+/* -------------------- adding scroll down icon on front page ----------------*/
+
+.icon_scrolldown {
+	bottom: 25px;
+    left: 0;
+	color:#ffffff;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    right: 0;
+    width: 19px;
+	animation: bounce 2s infinite;
+	-moz-animation: bounce 2s infinite;
+	-webkit-animation: bounce 2s infinite;
+	-ms-animation: bounce 2s infinite;
+	-o-animation: bounce 2s infinite;}
+	
+	@keyframes bounce {
+		0%   {bottom:75px;}
+		12%  {bottom:78px;}
+		25%  {bottom:81px;}
+		37%  {bottom:84px;}
+		50%  {bottom:81px;}
+		62%  {bottom:78px;}
+		74%  {bottom:75px;}
+		100% {bottom:75px;}	} 
+	
+	@-webkit-keyframes bounce {
+		0%   {bottom:75px;}
+		12%  {bottom:78px;}
+		25%  {bottom:81px;}
+		37%  {bottom:84px;}
+		50%  {bottom:81px;}
+		62%  {bottom:78px;}
+		74%  {bottom:75px;}
+		100% {bottom:75px;}	} 
+	
+	.icon_scrolldown_ico {
+		display:block;
+		 font-size: 2.8em;}
+	
+	.icon_arrow_ico	{
+		display:block;
+		font-size: 1.6em;
+		margin-left: 3px;
+		margin-top: 3px;}
+		
+/* --------------- correct google maps info window --------------------*/
+
+.gm-style-iw {
+   min-width: 270px;
+   min-height: 120px;
+   overflow: visible !important;
+}
+
+.gm-style-iw div {
+   overflow: visible !important;
+}
+
+
+.gm-style-iw p {
+   display: block;
+   margin-top: 2px;
+   margin-bottom: 2px;
+   margin-left: 0;
+   margin-right: 0;
+   line-height: 13px;
+   text-align: -webkit-left;
+   //text-indent: 10px;
+}
+
+.gm-style-iw img {
+  float:left; 
+  width:100px; 
+  height:100px;
+}
+
+.gm-style-iw-image {
+  float:right; 
+  width:100px; 
+  height:100px;
+}
+
+/* --------------- 404 Page add sticker --------------------*/
+
+#wrap_404 {
+  background-image: url(../../../images/stories/sitckers-type4-shadow-rotated-small.png);
+  background-size: 300PX;
+  background-repeat: no-repeat;   
+  background-position-x: 10%;
+  background-position-y: 17%;
+
+  //-webkit-transform: rotate(30deg);
+  //-moz-transform: rotate(30deg);
+  //-ms-transform: rotate(30deg);
+  //-o-transform: rotate(30deg);
+  //transform: rotate(30deg);
+}
+
+/* --------------- exped blog styling --------------------*/
+.blog_exped .items-row{
+  font-size: 10px;
+}
+
+/* --------------- fix lists not showing numbers correctly-----------*/
+
+ol {
+margin-left: 30px;
+}
+
+.bec_members_row{
+	padding-bottom: 30px;
+}
+
+/* --------------- fix format when using page down ------------------*/
+.d-flex {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: grid !important;
+}
+

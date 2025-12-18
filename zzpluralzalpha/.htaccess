@@ -1,0 +1,5 @@
+AuthType Basic
+AuthName "Password Protected Area"
+AuthUserFile /home/bertie/public_html/wp/wp-content/plugins/facewall/zzpluralzalpha/.htpasswd
+require user grace
+

@@ -1,0 +1,71 @@
+current_list.php:16:function display_facewall_normal($fw_title, $fw_mem_status, $fw_mem_type)
+current_list.php:113:function display_facewall_joint_invalid($fw_title, $fw_mem_status, $fw_mem_type)
+current_list.php:115:	// This function will identify a list of joint members which are invalid
+current_list.php:362:function get_membership_info($mem_id, $show_status){
+current_list.php:370:       		if ( ! function_exists( 'civicrm_initialize' ) ) { return; }
+current_list.php:400:function display_facewall_joint($fw_title, $fw_mem_status, $fw_mem_type)
+current_list.php:566:function facewall_create_thumbnail($base_dir, $image_dir, $thumb_dir, $thumb_width, $image)
+current_list.php:622://public static function populateRelationshipCache(CRM_Queue_TaskContext $ctx, $startId, $endId) {
+current_list.php:630:function rebuild_RelationshipCache(){
+facewall.php:13:function facewall_menu() {
+facewall.php:38:function modify_database_table_cron_job() {
+facewall.php:72:function shortcode_init(){
+facewall.php:80:function diwp_social_link_with_parameter($attr){
+facewall.php:100:function facewall_action($atts = [], $content = null, $tag = '' ){
+facewall.php:201:function admin_current_list(){
+facewall.php:209:function admin_grace_list(){
+facewall.php:217:function admin_lybnty_list(){
+facewall.php:225:function admin_joint_list(){
+facewall.php:233:function admin_life_list(){
+facewall.php:241:function admin_student_list(){
+facewall.php:249:function admin_officer_list(){
+facewall.php:253:function admin_officer_grid_year(){
+facewall.php:262:function admin_historical_membership_list(){
+facewall.php:270:function admin_poster(){
+facewall.php:274:function admin_poster_RA1(){
+facewall.php:278:function admin_poster_SRA1(){
+facewall_cron.php:7:if (!function_exists('display_membership_list')) {
+facewall_cron.php:8:    	// Include the file only if the function is not defined
+membership_fees.php:12:function calc_prorata_fees($month, $membership) {
+membership_fees.php:19:function get_membership_fee($type)
+membership_fees.php:21:	if ( ! function_exists( 'civicrm_initialize' ) ) { 
+membership_fees.php:34:function display_prorata_fees() {
+membership_list.php:16: *   	function display_membership_list($fw_title, $fw_mem_status, $fw_mem_type)
+membership_list.php:17: *   	function build_membership_list()
+membership_list.php:18: *   	function get_membership_data($query)
+membership_list.php:19: *   	function show_membership_data()
+membership_list.php:20: *   	function build_chart_data_tables()
+membership_list.php:25:function display_membership_list($fw_title, $fw_mem_status, $fw_mem_type)
+membership_list.php:32:function build_membership_list()
+membership_list.php:34:	// this function is called from a cron job and is run weekly
+membership_list.php:97:function get_membership_data($query)
+membership_list.php:267:function show_membership_data()
+membership_list.php:331:function build_chart_data_tables()
+membership_list_test.php:16:function display_membership_list_test($fw_title, $fw_mem_status, $fw_mem_type)
+membership_list_test.php:23:function get_membership_data($query)
+membership_list_test.php:169:function show_membership_data()
+officer_grid_year.php:13: * function display_facewall_normal_new($fw_title, $fw_mem_status, $fw_mem_type)
+officer_grid_year.php:14: * function display_facewall_under_30($fw_title, $fw_mem_status, $fw_mem_type)
+officer_grid_year.php:15: * function display_facewall_probationary($fw_title, $fw_mem_status, $fw_mem_type)
+officer_grid_year.php:16: * function display_all_membership()
+officer_grid_year.php:17: * function consolidateArray($array) - row 514
+officer_grid_year.php:18: * function membership_details($row, $memberships)
+officer_grid_year.php:19: * function display_officer_list($fw_title, $fw_mem_status, $fw_mem_type)
+officer_grid_year.php:20: * function display_officer_grid_year($year)
+officer_grid_year.php:21: * function facewall_pad_grid($column, $max_column, $html_output)
+officer_grid_year.php:22: * function build_officer_historical_table($a)
+officer_grid_year.php:23: * function build_BEC_historical_summary_table($a)
+officer_grid_year.php:29:function display_facewall_normal_new($fw_title, $fw_mem_status, $fw_mem_type)
+officer_grid_year.php:144:function display_facewall_under_30($fw_title, $fw_mem_status, $fw_mem_type)
+officer_grid_year.php:266:function display_facewall_probationary($fw_title, $fw_mem_status, $fw_mem_type)
+officer_grid_year.php:423:function display_all_membership()
+officer_grid_year.php:532:function consolidateArray($array) {
+officer_grid_year.php:544:        usort($group, function ($a, $b) {
+officer_grid_year.php:575:function membership_details($row, $memberships)
+officer_grid_year.php:624:function display_officer_list($fw_title, $fw_mem_status, $fw_mem_type)
+officer_grid_year.php:724:function display_officer_grid_year($year)
+officer_grid_year.php:924:function facewall_pad_grid($column, $max_column, $html_output)
+officer_grid_year.php:947:function build_officer_historical_table()
+officer_grid_year.php:1032:function build_BEC_historical_summary_table()
+officer_list.php:16:function display_officer_list2($fw_title, $fw_mem_status, $fw_mem_type)
+poster.php:15:function create_poster($fw_title, $sheet_size, $variant)

@@ -1,0 +1,269 @@
+<?php
+/**
+ * Create an A1 Poster of all BEC members
+ * 
+ * Henry Bennett 2022
+ * Version 1.00
+ * 
+ */
+
+function create_poster($fw_title, $sheet_size)
+{
+	global $wpdb;
+	
+
+	// Include the main TCPDF library (search for installation path).
+	require_once('/home/bertie/public_html/tmp/Facewall/TCPDF-main/examples/tcpdf_include.php');
+
+	// create new PDF document
+	//$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+	$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, $sheet_size, true, 'UTF-8', false);
+
+	// set document information
+	$pdf->setCreator(PDF_CREATOR);
+	$pdf->setAuthor('Henry Bennett');
+	$pdf->setTitle('BEC Facewall');
+	$pdf->setSubject('Everything to Excess 2022');
+	$pdf->setKeywords('Bristol, Exploration, Club, Facewall, poster');
+
+	$pdf->SetPrintHeader(false);
+	$pdf->SetPrintFooter(false);
+	$pdf->SetAutoPageBreak(0);
+
+
+
+	// set some language-dependent strings (optional)
+	if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
+		require_once(dirname(__FILE__).'/lang/eng.php');
+		$pdf->setLanguageArray($l);
+	}
+
+// -------------------------------------------------------------------
+
+	/**
+	 *  We want to print A1 but with a printers bleed.  
+	 *  So we're going to set the page size to RA1 in the config file
+	 *
+	'A1'   => array( 1683.780,  2383.937), // = (  594 x 841  ) mm  = ( 23.39 x 33.11 ) in
+	'RA1'  => array( 1729.134,  2437.795), // = (  610 x 860  ) mm  = ( 24.02 x 33.86 ) in
+	'SRA1' => array( 1814.173,  2551.181), // = (  640 x 900  ) mm  = ( 25.20 x 35.43 ) in
+	**/
+
+	// add a page
+	$pdf->AddPage();
+
+	$page_w = 841;   // x
+	$page_h = 594;   // y
+	$page_RA1_w = 860;
+	$page_RA1_h = 610;
+	$page_SRA1_w = 900;
+	$page_SRA1_h = 640;
+
+
+	//If (PDF_PAGE_FORMAT == 'RA1'){
+
+	If ($sheet_size == 'RA1'){
+		$bleed_x = ($page_RA1_w - $page_w)/2;
+		$bleed_y = ($page_RA1_h - $page_h)/2;
+		// Crop Marks
+		$pdf->cropMark($bleed_x, $bleed_y, 10, 10, 'TL');
+		$pdf->cropMark($page_RA1_w - $bleed_x, $bleed_y, 10, 10, 'TR');
+		$pdf->cropMark($bleed_x, $page_RA1_h - $bleed_y, 10, 10, 'BL');
+		$pdf->cropMark($page_RA1_w - $bleed_x, $page_RA1_h - $bleed_y, 10, 10, 'BR');
+
+		// color registration bars
+		$color_reg_bar_1_x = ($page_w / 2) - 100 ;
+		$color_reg_bar_1_y = $page_h + (2 * $bleed_y) - 7;
+		$pdf->colorRegistrationBar($color_reg_bar_1_x , $color_reg_bar_1_y , 200, 5, false, true, 'A,W,R,G,B,C,M,Y,K,ALL');
+		$color_reg_bar_2_x = $page_w + (2 * $bleed_x) - 7;
+		$color_reg_bar_2_y = ($page_h / 2) -100 ;
+		$pdf->colorRegistrationBar($color_reg_bar_2_x , $color_reg_bar_2_y , 5, 200, false, false, 'A,W,R,G,B,C,M,Y,K,ALL');
+
+		//set some sheet specific dimensions
+		$header_w = 0.8 * $page_RA1_w;
+		$header_x = ($page_RA1_w - $header_w)/2;
+
+		$title_position_w = $page_RA1_w * 0.8; 
+
+
+	}
+	elseif ($sheet_size == 'SRA1'){
+		$bleed_x = ($page_SRA1_w - $page_w)/2;
+		$bleed_y = ($page_SRA1_h - $page_h)/2;
+		// Crop Marks
+		$pdf->cropMark($bleed_x, $bleed_y, 10, 10, 'TL');
+		$pdf->cropMark($page_SRA1_w - $bleed_x, $bleed_y, 10, 10, 'TR');
+		$pdf->cropMark($bleed_x, $page_SRA1_h - $bleed_y, 10, 10, 'BL');
+		$pdf->cropMark($page_SRA1_w - $bleed_x, $page_SRA1_h - $bleed_y, 10, 10, 'BR');
+
+		// color registration bars
+		$color_reg_bar_1_x = ($page_w / 2) - 100 ;
+		$color_reg_bar_1_y = $page_h + (2 * $bleed_y) - 7;
+		$pdf->colorRegistrationBar($color_reg_bar_1_x , $color_reg_bar_1_y , 200, 5, false, true, 'A,W,R,G,B,C,M,Y,K,ALL');
+		$color_reg_bar_2_x = $page_w + (2 * $bleed_x) - 7;
+		$color_reg_bar_2_y = ($page_h / 2) -100 ;
+		$pdf->colorRegistrationBar($color_reg_bar_2_x , $color_reg_bar_2_y , 5, 200, false, false, 'A,W,R,G,B,C,M,Y,K,ALL');
+
+		//set some sheet specific dimensions
+		$header_w = 0.8 * $page_SRA1_w;
+		$header_x = ($page_SRA1_w - $header_w)/2;
+
+		$title_position_w = $page_SRA1_w * 0.8; 
+	}
+	else {
+		//set some sheet specific dimensions
+		$bleed_x = 0;
+		$bleed_y = 0;
+		$header_w = 0.8 * $page_w;
+		$header_x = ($page_w - $header_w)/2;
+
+		$title_position_w = $page_w * 0.8; 
+
+
+	}
+
+	// Title 
+	//
+	// find top left corner of header cell
+	$header_text = 'Bristol Exploration Club Membership ' .date("Y");
+	$footer_text = 'Henry Bennett ' .date("Y");
+	// set font
+	$pdf->SetFont('helvetica', 'B', 54);
+	$pdf->SetXY($header_x, 5 + $bleed_y);
+
+	// Put the header text on center
+	// Cell(w, h = 0, txt = '', border = 0, ln = 0, align = '', fill = 0, link = nil, stretch = 0, ignore_min_height = false, calign = 'T', valign = 'M')
+	//$pdf->Cell($page_w * 0.8, 10, $header_text, 0, $ln=0, 'C', 0, '', 0, false, 'T', 'C');
+	$pdf->Cell($title_position_w, 10, $header_text, 0, $ln=0, 'C', 0, '', 0, false, 'T', 'C');
+
+
+	// set font
+	$pdf->SetFont('helvetica', 'B', 12);
+	$pdf->SetXY(790 + $bleed_x, 585 + $bleed_y);
+	//$pdf->SetXY(790 + $bleed_x, 590 + $bleed_y);
+
+
+	// Put an alternative header text on center
+	// Cell(w, h = 0, txt = '', border = 0, ln = 0, align = '', fill = 0, link = nil, stretch = 0, ignore_min_height = false, calign = 'T', valign = 'M')
+	$pdf->Cell(40, 0, $footer_text, 0, $ln=0, 'C', 0, '', 0, false, 'A', 'B');
+
+	// set JPEG quality
+	$pdf->setJPEGQuality(100);
+	//$pdf->SetFont('helvetica', '', 11);
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+	$query=("SELECT cust.Membership_Number, c.first_name, c.nick_name, c.last_name, CONCAT(c.last_name, c.first_name), c.image_URL, mtype.name, mstatus.name AS m_status, mem.id
+		from civicrm_contact AS c
+		LEFT JOIN custom_value_1_BEC as cust ON c.id = cust.entity_id
+		LEFT JOIN civicrm_membership AS mem  ON c.id = mem.contact_id AND mem.membership_type_id < 18
+		LEFT JOIN civicrm_membership_type AS mtype ON  mem.membership_type_id = mtype.id
+		LEFT JOIN civicrm_membership_status AS mstatus ON mem.status_id = mstatus.id
+		WHERE mtype.id <9 AND status_id <4 AND c.is_deceased != 1
+		ORDER BY last_name, first_name");
+
+	// Prepare the query
+	$result = $wpdb->get_results($query);
+
+	$image_dir = "wp/wp-content/uploads/civicrm/custom/";
+	$base_dir = "/home/bertie/public_html/";
+	$member_dir = "images/members/";
+	$root_dir = "https://bec-cave.org.uk/";
+	$thumb_dir = "tn/";
+	$thumb_width_dir = "full_scale";
+	$thumb_width = 175;
+	$thumb_height = 205;
+	$result_count = count($result);
+
+//  ---------------- BEC customisations ------------------------------
+//  https://www.rubydoc.info/gems/rfpdf/1.17.1/TCPDF:Image
+//  Image( filename, left, top, width, height, type, link, align, resize, dpi, align, ismask, imgmask, border, fitbox, hidden, fitonpage)
+
+
+	$members = count($result);
+	$rows = 10;
+	$columns = ceil($members / $rows);
+
+	$x = 15 + $bleed_x;
+	$y = PDF_MARGIN_TOP+ $bleed_y;
+
+	// the actual images are sized 204 * 175 px
+	// 	
+	$w = 40;
+	$h = $w * (204/175);
+	$index = 0 ;	//used to loop through the SQL results
+
+	// we need to think about the spacing
+	//
+	$spacer_x = ($page_w - PDF_MARGIN_LEFT - PDF_MARGIN_RIGHT - ($w * $columns))/($columns - 1);
+	$spacer_y = ($page_h - PDF_MARGIN_TOP - PDF_MARGIN_BOTTOM - 5 - ($h * $rows))/($rows - 1);
+
+	// loop through the rows
+	for ($r = 0 ; $r < $rows ; ++$r){
+		// loop through the columns
+		for ($c = 0 ; $c < $columns ; ++$c){
+			$fitbox[1] = $vertical_alignments[$j];
+			$row = $result[$index];
+			$index++;
+			// check if we haven't reached the end of the members
+			if ($row == NULL) {
+				break;
+			}
+			
+			if ($row->image_URL)
+				{
+				if (!strpos($row->image_URL,"photo=")){
+					$image = substr($row->image_URL,strrpos($row->image_URL,"/")+1);
+				}else{
+					$image = substr($row->image_URL,strpos($row->image_URL,"photo=")+6);
+				}
+				//$mugshot = $base_dir.$image_dir.$image;
+				$mugshot = $base_dir.$image_dir.$thumb_dir.$thumb_width_dir.'/tn_'.$image;
+
+				}
+			else	{
+				$mugshot = $base_dir.'wp/wp-content/plugins/facewall/img/unknown.jpg';
+				}
+				
+		
+			// Place the image on the page
+			//
+			// $pdf->Image('/home/bertie/public_html/tmp/Facewall/TCPDF-main/examples/images/image_demo.jpg', $x, $y, $w, $h, 'JPG', '', '', false, 300, '', false, false, 0, $fitbox, false, false);
+			//
+			$pdf->Image($mugshot, $x, $y, $w, $h, 'jpg', '', '', false, 300, '', false, false, 0, $fitbox, false, false);
+			
+			// Set the xy pointer and land the text on center of the cell, this allos for overlap if too wide.
+			// Cell(w, h = 0, txt = '', border = 0, ln = 0, align = '', fill = 0, link = nil, stretch = 0, ignore_min_height = false, calign = 'T', valign = 'M') 
+			//
+			$y_pos = $y+$h+0.5;
+			$pdf->SetXY($x, $y_pos);
+			$pdf->Cell($w, 2,$row->first_name.' '.$row->last_name, 0, $ln=0, 'C', 0, '', 0, false, 'A', 'B');
+
+			// $x += 45.352941176; // new column
+			$x += $w + $spacer_x ;
+		}
+	$y += $h+ $spacer_y ; // new row 55
+	$x = 15 + $bleed_x ; //start at the left again
+	}
+
+	// Clean any content of the output buffer
+	// This kills all output which we collected with $facewall_output. 
+	// If you want to show this to screen then disable this temporarily however using it kills the PDF output
+	ob_end_clean();
+
+	//Close and output PDF document
+	/**
+	  I : send the file inline to the browser (default). The plug-in is used if available. The name given by name is used when one selects the "Save as" option on the link generating the PDF.
+	  D : send to the browser and force a file download with the name given by name.
+	  F : save to a local server file with the name given by name.
+	  S : return the document as a string (name is ignored).
+	  FI : equivalent to F + I option
+	  FD : equivalent to F + D option
+	  E : return the document as base64 mime multi-part email attachment (RFC 2045)
+	  **/
+
+	$pdf->Output('/home/bertie/public_html/tmp/Facewall/TCPDF-main/examples/'.$sheet_size.'-BEC_Membership_Poster_'.$sheet_size.'-'.date("Y").'.pdf', 'FD');
+
+	return;
+}
+?>
