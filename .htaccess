@@ -1,0 +1,6 @@
+cat <<'EOF' > .htaccess
+<DirectoryMatch "^/.*/\.git/">
+    Require all denied
+</DirectoryMatch>
+EOF
+

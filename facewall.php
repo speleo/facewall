@@ -9,6 +9,11 @@
    
 */
 
+defined( 'ABSPATH' ) || exit;
+
+require_once __DIR__ . '/includes/pdf.php';
+
+
 // Add menu
 function facewall_menu() {
     add_menu_page("Facewall", "Facewall","manage_options", "facewall_plugin", "current_list",plugins_url('/facewall/img/facewall.png'));

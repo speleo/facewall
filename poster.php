@@ -18,7 +18,11 @@ function create_poster($fw_title, $sheet_size, $variant)
 	
 	// Include the main TCPDF library (search for installation path).
 	//require_once('/home/bertie/public_html/tmp/Facewall/TCPDF-main/examples/tcpdf_include.php');
-	require_once('/home/bertie/public_html/wp/wp-content/plugins/facewall/tcpdf/examples/tcpdf_include.php');
+	//require_once('/home/bertie/public_html/wp/wp-content/plugins/facewall/tcpdf/examples/tcpdf_include.php');
+	require_once __DIR__ . '/includes/pdf.php';
+	if ( ! facewall_load_tcpdf() ) {
+    		wp_die( 'PDF generation is unavailable (TCPDF not loaded).' );
+	}
 
 	// create new PDF document
 	// $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
