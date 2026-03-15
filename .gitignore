@@ -7,3 +7,5 @@
 /cache/
 /tmp/
 .env
+*.pdf
+*.txt

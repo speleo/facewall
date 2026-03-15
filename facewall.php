@@ -11,7 +11,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-require_once __DIR__ . '/includes/pdf.php';
+//require_once __DIR__ . '/includes/pdf.php';
 
 
 // Add menu
