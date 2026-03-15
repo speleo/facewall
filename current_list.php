@@ -604,20 +604,20 @@ function facewall_create_thumbnail($base_dir, $image_dir, $thumb_dir, $thumb_wid
 		if($width_new > $old_x)
 			{
 	        		//cut point by height
-	        		$h_point = (($old_y - $height_new) / 2);
+	        		$h_point = (int) round(($old_y - $height_new) / 2);
 		        	//copy image
-				imagecopyresampled($dst_img, $src_img,            0, 0, 0, $h_point, $thumb_w, $thumb_h, $old_x, $height_new);
-				$dst_img_orig_scale = ImageCreateTrueColor($old_x, $height_new);
-				imagecopyresampled($dst_img_orig_scale, $src_img, 0, 0, 0, $h_point, $old_x, $height_new, $old_x, $height_new);
+				imagecopyresampled($dst_img, $src_img,            0, 0, 0, $h_point, $thumb_w, $thumb_h, $old_x, (int) round($height_new));
+				$dst_img_orig_scale = ImageCreateTrueColor($old_x, (int) round($height_new));
+				imagecopyresampled($dst_img_orig_scale, $src_img, 0, 0, 0, $h_point, $old_x, (int) round($height_new), $old_x, (int) round($height_new));
 			}else{
 				//cut point by width
-				$w_point = (($old_x - $width_new) / 2);
-				imagecopyresampled($dst_img, $src_img,            0, 0, $w_point, 0, $thumb_w, $thumb_h, $width_new, $old_y);
-				$dst_img_orig_scale = ImageCreateTrueColor($width_new, $old_y);
-				imagecopyresampled($dst_img_orig_scale, $src_img, 0, 0, $w_point, 0, $width_new, $old_y, $width_new, $old_y);
+				$w_point = (int) round(($old_x - $width_new) / 2);
+				imagecopyresampled($dst_img, $src_img,            0, 0, $w_point, 0, $thumb_w, $thumb_h, (int) round($width_new), $old_y);
+				$dst_img_orig_scale = ImageCreateTrueColor((int) round($width_new), $old_y);
+				imagecopyresampled($dst_img_orig_scale, $src_img, 0, 0, $w_point, 0, (int) round($width_new), $old_y, (int) round($width_new), $old_y);
 			}
 
-		if (preg_match("/png/",$system[1]))
+		if (preg_match("/png/i", $extension))
 			{
 				imagepng($dst_img,$filename);
 				imagepng($dst_img_orig_scale,$filename_orig_scale);

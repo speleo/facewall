@@ -7,5 +7,5 @@
 /cache/
 /tmp/
 .env
-*.pdf
 *.txt
+poster_output/
